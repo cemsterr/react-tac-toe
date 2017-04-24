@@ -1,0 +1,26 @@
+import React, { Component } from 'react';
+/*
+class Square extends React.Component {
+  render() {
+    return (
+      <button className="square" onClick={() => this.props.onClick()}>
+      {this.props.value}
+      </button>
+    );
+  }
+}
+
+export default Square;
+*/
+// bu bir "stateless functional component" oldu. (sadece render method'ı var)
+// bu durumda notation aşağıdaki gibi basitleştirilebiliyor.
+
+function Square(props) {
+  return (
+    <button className="square" onClick={() => props.onClick()}>
+      {props.value}
+    </button>
+  );
+}
+
+export default Square;
