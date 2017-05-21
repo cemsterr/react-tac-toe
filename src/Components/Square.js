@@ -16,6 +16,7 @@ export default Square;
 // bu durumda notation aşağıdaki gibi basitleştirilebiliyor.
 
 function Square(props) {
+
   return (
     <button className="square" onClick={() => props.onClick()}>
       {props.value}

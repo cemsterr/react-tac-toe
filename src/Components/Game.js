@@ -7,6 +7,7 @@ class Game extends React.Component {
     this.state = {
       history: [
         {
+          //squares: [[0,0], [0,1], [0,2], [1,0], [1,1], [1,2], [2,0], [2,1], [2,2]]//Array(9).fill(null)
           squares: Array(9).fill(null)
         }
       ],
@@ -14,6 +15,7 @@ class Game extends React.Component {
       oIsNext: true
     };
   }
+
   handleClick(i) {
     const history = this.state.history;
     const current = history[history.length - 1];
@@ -31,6 +33,7 @@ class Game extends React.Component {
       oIsNext: !this.state.oIsNext
     });
   }
+
   calculateWinner(squares) {
     const lines = [
       [0, 1, 2],
@@ -50,21 +53,29 @@ class Game extends React.Component {
     }
     return null;
   }
+
   jumpTo(step) {
     this.setState({
       stepNumber: step,
       oIsNext: (step % 2) ? false : true
     });
   }
+
   render() {
     const history = this.state.history;
+    const totalMoves = history.length;
     const moves = history.map((step, move) => {
-        const desc = move ? 'Move #' + move : 'Game start';
-        return (
-          <li key={move}>
-            <a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
-          </li>
-        );
+      const desc = move ? 'Move #' + move : 'Game start';
+      const currentMoveStyle = {
+        fontWeight: move === totalMoves - 1 ? 'bold' : 'normal',
+        color: move === totalMoves - 1 ? 'red' : 'black'
+      };
+
+      return (
+        <li key={move}>
+          <a href="#" style={currentMoveStyle} onClick={() => this.jumpTo(move)}>{desc}</a>
+        </li>
+      );
     });
 
     const current = history[this.state.stepNumber];
@@ -76,6 +87,7 @@ class Game extends React.Component {
     } else {
       status = 'Next player: ' + (this.state.oIsNext ? 'O' : 'X');
     }
+
     return (
       <div className="game">
         <div className="game-board">
